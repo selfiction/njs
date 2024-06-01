@@ -1,1 +1,1 @@
-OTP Auth. made via node.js
+OTP Authentification made via node.js, ExpressJS.
