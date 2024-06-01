@@ -1,27 +1,15 @@
-const fs = require('fs')
-const http = require('http')
+const express = require('express')
+const app = express()
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html')
+})
 
 const PORT = 3000
-const HOST = '127.0.0.1'
 
-let server = http.createServer((req, res) => {
-    res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
-
-    const stream = fs.createReadStream('./index.html')
-    stream.pipe(res)
+app.listen(PORT, () => {
+    console.log(`SERVER STARTED AT http://localhost:${PORT}`)
 })
 
-let otp_code = Math.floor(Math.random() * 9999) + 1000;
 
-fs.writeFile('./code.txt', parseInt(otp_code).toString(), (err) => {
-    if (err){
-        console.log('OTP FAILURE')
-    }
-    console.log('OTP GENERATED')
-})
-console.log(otp_code)
-
-server.listen(PORT, HOST, () => {
-    console.log(`SERVER STARED AT http://${HOST}:${PORT}`)
-})
 
